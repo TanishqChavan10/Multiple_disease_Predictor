@@ -10,7 +10,7 @@ import gzip
 # Machine learning model: XGBoost 
 
 # import the dataset
-dataset_df = pd.read_csv('data/dataset.csv')
+dataset_df = pd.read_csv('../data/dataset.csv')
 
 # Preprocess
 dataset_df = dataset_df.apply(lambda col: col.str.strip())
