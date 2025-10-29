@@ -41,14 +41,14 @@ lung_cancer_model = joblib.load('models/lung_cancer_model.sav')
 with st.sidebar:
     selected = option_menu('Multiple Disease Prediction', [
         'Disease Prediction',
-        'Diabetes Prediction',
         'Heart disease Prediction',
-        'Parkison Prediction',
         'Liver prediction',
+        # 'Lung Cancer Prediction',
+        'Diabetes Prediction',
+        # 'Parkison Prediction',
         'Hepatitis prediction',
-        'Lung Cancer Prediction',
-        'Chronic Kidney prediction',
-        'Breast Cancer Prediction',
+        # 'Chronic Kidney prediction',
+        # 'Breast Cancer Prediction',
 
     ],
         icons=['','activity', 'heart', 'person','person','person','person','bar-chart-fill'],
@@ -102,26 +102,26 @@ if selected == 'Diabetes Prediction':  # pagetitle
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        Pregnancies = st.number_input("Number of Pregnencies")
+        Pregnancies = st.number_input("Number of Pregnencies", min_value=0, max_value=20, value=0, step=1, help="Enter number of pregnancies (0-20)")
     with col2:
-        Glucose = st.number_input("Glucose level")
+        Glucose = st.number_input("Glucose level", min_value=0.0, max_value=300.0, value=0.0, step=1.0, help="Enter glucose level in mg/dL (0-300)")
     with col3:
-        BloodPressure = st.number_input("Blood pressure  value")
+        BloodPressure = st.number_input("Blood pressure value", min_value=0.0, max_value=200.0, value=0.0, step=1.0, help="Enter blood pressure in mm Hg (0-200)")
     with col1:
 
-        SkinThickness = st.number_input("Sckinthickness value")
+        SkinThickness = st.number_input("Skin thickness value", min_value=0.0, max_value=100.0, value=0.0, step=1.0, help="Enter skin thickness in mm (0-100)")
 
     with col2:
 
-        Insulin = st.number_input("Insulin value ")
+        Insulin = st.number_input("Insulin value", min_value=0.0, max_value=900.0, value=0.0, step=1.0, help="Enter insulin level in µU/mL (0-900)")
     with col3:
-        BMI = st.number_input("BMI value")
+        BMI = st.number_input("BMI value", min_value=0.0, max_value=70.0, value=0.0, step=0.1, help="Enter BMI (0-70)")
     with col1:
         DiabetesPedigreefunction = st.number_input(
-            "Diabetespedigreefunction value")
+            "Diabetes pedigree function value", min_value=0.0, max_value=3.0, value=0.0, step=0.01, help="Enter diabetes pedigree function (0-3)")
     with col2:
 
-        Age = st.number_input("AGE")
+        Age = st.number_input("AGE", min_value=1, max_value=120, value=1, step=1, help="Enter age in years (1-120)")
 
     # code for prediction
     diabetes_dig = ''
@@ -159,7 +159,7 @@ if selected == 'Heart disease Prediction':
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        age = st.number_input("Age")
+        age = st.number_input("Age", min_value=1, max_value=120, value=1, step=1, help="Enter age in years (1-120)")
     with col2:
         sex=0
         display = ("male", "female")
@@ -183,11 +183,11 @@ if selected == 'Heart disease Prediction':
         elif value == "asymptotic":
             cp = 3
     with col1:
-        trestbps = st.number_input("Resting Blood Pressure")
+        trestbps = st.number_input("Resting Blood Pressure", min_value=0.0, max_value=250.0, value=0.0, step=1.0, help="Enter resting blood pressure in mm Hg (0-250)")
 
     with col2:
 
-        chol = st.number_input("Serum Cholestrol")
+        chol = st.number_input("Serum Cholestrol", min_value=0.0, max_value=600.0, value=0.0, step=1.0, help="Enter serum cholesterol in mg/dL (0-600)")
     
     with col3:
         restecg=0
@@ -203,10 +203,10 @@ if selected == 'Heart disease Prediction':
 
     with col1:
         exang=0
-        thalach = st.number_input("Max Heart Rate Achieved")
+        thalach = st.number_input("Max Heart Rate Achieved", min_value=0.0, max_value=250.0, value=0.0, step=1.0, help="Enter maximum heart rate (0-250)")
    
     with col2:
-        oldpeak = st.number_input("ST depression induced by exercise relative to rest")
+        oldpeak = st.number_input("ST depression induced by exercise relative to rest", min_value=0.0, max_value=10.0, value=0.0, step=0.1, help="Enter ST depression (0-10)")
     with col3:
         slope=0
         display = ("upsloping","flat","downsloping")
@@ -219,7 +219,7 @@ if selected == 'Heart disease Prediction':
         elif value == "downsloping":
             slope = 2
     with col1:
-        ca = st.number_input("Number of major vessels (0–3) colored by flourosopy")
+        ca = st.number_input("Number of major vessels (0–3) colored by flourosopy", min_value=0, max_value=3, value=0, step=1, help="Enter number of vessels (0-3)")
     with col2:
         thal=0
         display = ("normal","fixed defect","reversible defect")
@@ -284,52 +284,52 @@ if selected == 'Parkison Prediction':
     name = st.text_input("Name:")
     col1, col2, col3 = st.columns(3)
     with col1:
-        MDVP = st.number_input("MDVP:Fo(Hz)")
+        MDVP = st.number_input("MDVP:Fo(Hz)", min_value=0.0, max_value=300.0, value=0.0, step=0.01, help="Average vocal fundamental frequency (0-300 Hz)")
     with col2:
-        MDVPFIZ = st.number_input("MDVP:Fhi(Hz)")
+        MDVPFIZ = st.number_input("MDVP:Fhi(Hz)", min_value=0.0, max_value=600.0, value=0.0, step=0.01, help="Maximum vocal fundamental frequency (0-600 Hz)")
     with col3:
-        MDVPFLO = st.number_input("MDVP:Flo(Hz)")
+        MDVPFLO = st.number_input("MDVP:Flo(Hz)", min_value=0.0, max_value=300.0, value=0.0, step=0.01, help="Minimum vocal fundamental frequency (0-300 Hz)")
     with col1:
-        MDVPJITTER = st.number_input("MDVP:Jitter(%)")
+        MDVPJITTER = st.number_input("MDVP:Jitter(%)", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Jitter percentage (0-1)")
     with col2:
-        MDVPJitterAbs = st.number_input("MDVP:Jitter(Abs)")
+        MDVPJitterAbs = st.number_input("MDVP:Jitter(Abs)", min_value=0.0, max_value=0.01, value=0.0, step=0.00001, help="Absolute jitter (0-0.01)")
     with col3:
-        MDVPRAP = st.number_input("MDVP:RAP")
+        MDVPRAP = st.number_input("MDVP:RAP", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Relative amplitude perturbation (0-1)")
 
     with col2:
 
-        MDVPPPQ = st.number_input("MDVP:PPQ ")
+        MDVPPPQ = st.number_input("MDVP:PPQ", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Five-point period perturbation quotient (0-1)")
     with col3:
-        JitterDDP = st.number_input("Jitter:DDP")
+        JitterDDP = st.number_input("Jitter:DDP", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Jitter DDP (0-1)")
     with col1:
-        MDVPShimmer = st.number_input("MDVP:Shimmer")
+        MDVPShimmer = st.number_input("MDVP:Shimmer", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Shimmer (0-1)")
     with col2:
-        MDVPShimmer_dB = st.number_input("MDVP:Shimmer(dB)")
+        MDVPShimmer_dB = st.number_input("MDVP:Shimmer(dB)", min_value=0.0, max_value=3.0, value=0.0, step=0.01, help="Shimmer in dB (0-3)")
     with col3:
-        Shimmer_APQ3 = st.number_input("Shimmer:APQ3")
+        Shimmer_APQ3 = st.number_input("Shimmer:APQ3", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Three-point amplitude perturbation quotient (0-1)")
     with col1:
-        ShimmerAPQ5 = st.number_input("Shimmer:APQ5")
+        ShimmerAPQ5 = st.number_input("Shimmer:APQ5", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Five-point amplitude perturbation quotient (0-1)")
     with col2:
-        MDVP_APQ = st.number_input("MDVP:APQ")
+        MDVP_APQ = st.number_input("MDVP:APQ", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Amplitude perturbation quotient (0-1)")
     with col3:
-        ShimmerDDA = st.number_input("Shimmer:DDA")
+        ShimmerDDA = st.number_input("Shimmer:DDA", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Shimmer DDA (0-1)")
     with col1:
-        NHR = st.number_input("NHR")
+        NHR = st.number_input("NHR", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Noise-to-harmonics ratio (0-1)")
     with col2:
-        HNR = st.number_input("HNR")
+        HNR = st.number_input("HNR", min_value=0.0, max_value=50.0, value=0.0, step=0.01, help="Harmonics-to-noise ratio (0-50)")
   
     with col2:
-        RPDE = st.number_input("RPDE")
+        RPDE = st.number_input("RPDE", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Recurrence period density entropy (0-1)")
     with col3:
-        DFA = st.number_input("DFA")
+        DFA = st.number_input("DFA", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Detrended fluctuation analysis (0-1)")
     with col1:
-        spread1 = st.number_input("spread1")
+        spread1 = st.number_input("spread1", min_value=-10.0, max_value=0.0, value=-7.0, step=0.01, help="Nonlinear measure of fundamental frequency variation (-10-0)")
     with col1:
-        spread2 = st.number_input("spread2")
+        spread2 = st.number_input("spread2", min_value=0.0, max_value=1.0, value=0.0, step=0.01, help="Nonlinear measure of fundamental frequency variation (0-1)")
     with col3:
-        D2 = st.number_input("D2")
+        D2 = st.number_input("D2", min_value=0.0, max_value=5.0, value=0.0, step=0.01, help="Correlation dimension (0-5)")
     with col1:
-        PPE = st.number_input("PPE")
+        PPE = st.number_input("PPE", min_value=0.0, max_value=1.0, value=0.0, step=0.0001, help="Pitch period entropy (0-1)")
 
     # code for prediction
     parkinson_dig = ''
@@ -372,7 +372,7 @@ if selected == 'Lung Cancer Prediction':
     with col1:
         gender = st.selectbox("Gender:", lung_cancer_data['GENDER'].unique())
     with col2:
-        age = st.number_input("Age")
+        age = st.number_input("Age", min_value=1, max_value=120, value=1, step=1, help="Enter age in years (1-120)")
     with col3:
         smoking = st.selectbox("Smoking:", ['NO', 'YES'])
     with col1:
@@ -430,6 +430,9 @@ if selected == 'Lung Cancer Prediction':
 
         # Map string values to numeric
         user_data.replace({'NO': 1, 'YES': 2}, inplace=True)
+        
+        # Encode gender: Male -> 1, Female -> 0
+        user_data['GENDER'] = user_data['GENDER'].map({'Male': 1, 'Female': 0})
 
         # Strip leading and trailing whitespaces from column names
         user_data.columns = user_data.columns.str.strip()
@@ -477,24 +480,24 @@ if selected == 'Liver prediction':  # pagetitle
         elif value == "female":
             Sex = 1
     with col2:
-        age = st.number_input("Entre your age") # 2 
+        age = st.number_input("Entre your age", min_value=1, max_value=120, value=1, step=1, help="Enter age in years (1-120)") # 2 
     with col3:
-        Total_Bilirubin = st.number_input("Entre your Total_Bilirubin") # 3
+        Total_Bilirubin = st.number_input("Entre your Total_Bilirubin", min_value=0.0, max_value=100.0, value=0.0, step=0.1, help="Enter total bilirubin in mg/dL (0-100)") # 3
     with col1:
-        Direct_Bilirubin = st.number_input("Entre your Direct_Bilirubin")# 4
+        Direct_Bilirubin = st.number_input("Entre your Direct_Bilirubin", min_value=0.0, max_value=50.0, value=0.0, step=0.1, help="Enter direct bilirubin in mg/dL (0-50)")# 4
 
     with col2:
-        Alkaline_Phosphotase = st.number_input("Entre your Alkaline_Phosphotase") # 5
+        Alkaline_Phosphotase = st.number_input("Entre your Alkaline_Phosphotase", min_value=0.0, max_value=3000.0, value=0.0, step=1.0, help="Enter alkaline phosphatase in IU/L (0-3000)") # 5
     with col3:
-        Alamine_Aminotransferase = st.number_input("Entre your Alamine_Aminotransferase") # 6
+        Alamine_Aminotransferase = st.number_input("Entre your Alamine_Aminotransferase", min_value=0.0, max_value=5000.0, value=0.0, step=1.0, help="Enter ALT in IU/L (0-5000)") # 6
     with col1:
-        Aspartate_Aminotransferase = st.number_input("Entre your Aspartate_Aminotransferase") # 7
+        Aspartate_Aminotransferase = st.number_input("Entre your Aspartate_Aminotransferase", min_value=0.0, max_value=5000.0, value=0.0, step=1.0, help="Enter AST in IU/L (0-5000)") # 7
     with col2:
-        Total_Protiens = st.number_input("Entre your Total_Protiens")# 8
+        Total_Protiens = st.number_input("Entre your Total_Protiens", min_value=0.0, max_value=15.0, value=0.0, step=0.1, help="Enter total proteins in g/dL (0-15)")# 8
     with col3:
-        Albumin = st.number_input("Entre your Albumin") # 9
+        Albumin = st.number_input("Entre your Albumin", min_value=0.0, max_value=10.0, value=0.0, step=0.1, help="Enter albumin in g/dL (0-10)") # 9
     with col1:
-        Albumin_and_Globulin_Ratio = st.number_input("Entre your Albumin_and_Globulin_Ratio") # 10 
+        Albumin_and_Globulin_Ratio = st.number_input("Entre your Albumin_and_Globulin_Ratio", min_value=0.0, max_value=10.0, value=0.0, step=0.1, help="Enter A/G ratio (0-10)") # 10 
     # code for prediction
     liver_dig = ''
 
@@ -531,34 +534,34 @@ if selected == 'Hepatitis prediction':
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        age = st.number_input("Enter your age")  # 2
+        age = st.number_input("Enter your age", min_value=1, max_value=120, value=1, step=1, help="Enter age in years (1-120)")  # 2
     with col2:
         sex = st.selectbox("Gender", ["Male", "Female"])
         sex = 1 if sex == "Male" else 2
     with col3:
-        total_bilirubin = st.number_input("Enter your Total Bilirubin")  # 3
+        total_bilirubin = st.number_input("Enter your Total Bilirubin", min_value=0.0, max_value=100.0, value=0.0, step=0.1, help="Enter total bilirubin in mg/dL (0-100)")  # 3
 
     with col1:
-        direct_bilirubin = st.number_input("Enter your Direct Bilirubin")  # 4
+        direct_bilirubin = st.number_input("Enter your Direct Bilirubin", min_value=0.0, max_value=50.0, value=0.0, step=0.1, help="Enter direct bilirubin in mg/dL (0-50)")  # 4
     with col2:
-        alkaline_phosphatase = st.number_input("Enter your Alkaline Phosphatase")  # 5
+        alkaline_phosphatase = st.number_input("Enter your Alkaline Phosphatase", min_value=0.0, max_value=3000.0, value=0.0, step=1.0, help="Enter alkaline phosphatase in IU/L (0-3000)")  # 5
     with col3:
-        alamine_aminotransferase = st.number_input("Enter your Alamine Aminotransferase")  # 6
+        alamine_aminotransferase = st.number_input("Enter your Alamine Aminotransferase", min_value=0.0, max_value=5000.0, value=0.0, step=1.0, help="Enter ALT in IU/L (0-5000)")  # 6
 
     with col1:
-        aspartate_aminotransferase = st.number_input("Enter your Aspartate Aminotransferase")  # 7
+        aspartate_aminotransferase = st.number_input("Enter your Aspartate Aminotransferase", min_value=0.0, max_value=5000.0, value=0.0, step=1.0, help="Enter AST in IU/L (0-5000)")  # 7
     with col2:
-        total_proteins = st.number_input("Enter your Total Proteins")  # 8
+        total_proteins = st.number_input("Enter your Total Proteins", min_value=0.0, max_value=15.0, value=0.0, step=0.1, help="Enter total proteins in g/dL (0-15)")  # 8
     with col3:
-        albumin = st.number_input("Enter your Albumin")  # 9
+        albumin = st.number_input("Enter your Albumin", min_value=0.0, max_value=10.0, value=0.0, step=0.1, help="Enter albumin in g/dL (0-10)")  # 9
 
     with col1:
-        albumin_and_globulin_ratio = st.number_input("Enter your Albumin and Globulin Ratio")  # 10
+        albumin_and_globulin_ratio = st.number_input("Enter your Albumin and Globulin Ratio", min_value=0.0, max_value=10.0, value=0.0, step=0.1, help="Enter A/G ratio (0-10)")  # 10
 
     with col2:
-        your_ggt_value = st.number_input("Enter your GGT value")  # Add this line
+        your_ggt_value = st.number_input("Enter your GGT value", min_value=0.0, max_value=1500.0, value=0.0, step=1.0, help="Enter GGT in IU/L (0-1500)")  # Add this line
     with col3:
-        your_prot_value = st.number_input("Enter your PROT value")  # Add this line
+        your_prot_value = st.number_input("Enter your PROT value", min_value=0.0, max_value=15.0, value=0.0, step=0.1, help="Enter PROT in g/dL (0-15)")  # Add this line
 
     # Code for prediction
     hepatitis_result = ''
@@ -617,7 +620,7 @@ if selected == 'Jaundice prediction':  # pagetitle
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        age = st.number_input("Entre your age   ") # 2 
+        age = st.number_input("Entre your age", min_value=1, max_value=120, value=1, step=1, help="Enter age in years (1-120)")   # 2 
     with col2:
         Sex=0
         display = ("male", "female")
@@ -628,18 +631,18 @@ if selected == 'Jaundice prediction':  # pagetitle
         elif value == "female":
             Sex = 1
     with col3:
-        Total_Bilirubin = st.number_input("Entre your Total_Bilirubin") # 3
+        Total_Bilirubin = st.number_input("Entre your Total_Bilirubin", min_value=0.0, max_value=100.0, value=0.0, step=0.1, help="Enter total bilirubin in mg/dL (0-100)") # 3
     with col1:
-        Direct_Bilirubin = st.number_input("Entre your Direct_Bilirubin")# 4
+        Direct_Bilirubin = st.number_input("Entre your Direct_Bilirubin", min_value=0.0, max_value=50.0, value=0.0, step=0.1, help="Enter direct bilirubin in mg/dL (0-50)")# 4
 
     with col2:
-        Alkaline_Phosphotase = st.number_input("Entre your Alkaline_Phosphotase") # 5
+        Alkaline_Phosphotase = st.number_input("Entre your Alkaline_Phosphotase", min_value=0.0, max_value=3000.0, value=0.0, step=1.0, help="Enter alkaline phosphatase in IU/L (0-3000)") # 5
     with col3:
-        Alamine_Aminotransferase = st.number_input("Entre your Alamine_Aminotransferase") # 6
+        Alamine_Aminotransferase = st.number_input("Entre your Alamine_Aminotransferase", min_value=0.0, max_value=5000.0, value=0.0, step=1.0, help="Enter ALT in IU/L (0-5000)") # 6
     with col1:
-        Total_Protiens = st.number_input("Entre your Total_Protiens")# 8
+        Total_Protiens = st.number_input("Entre your Total_Protiens", min_value=0.0, max_value=15.0, value=0.0, step=0.1, help="Enter total proteins in g/dL (0-15)")# 8
     with col2:
-        Albumin = st.number_input("Entre your Albumin") # 9 
+        Albumin = st.number_input("Entre your Albumin", min_value=0.0, max_value=10.0, value=0.0, step=0.1, help="Enter albumin in g/dL (0-10)") # 9 
     # code for prediction
     jaundice_dig = ''
 
@@ -684,7 +687,7 @@ if selected == 'Chronic Kidney prediction':
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        age = st.slider("Enter your age", 1, 100, 25)  # 2
+        age = st.number_input("Enter your age", min_value=1, max_value=120, value=25, step=1, help="Enter age in years (1-120)")  # 2
     with col2:
         bp = st.slider("Enter your Blood Pressure", 50, 200, 120)  # Add your own ranges
     with col3:
